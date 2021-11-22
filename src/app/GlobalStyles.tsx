@@ -5,6 +5,15 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  :root{
+    --color-orange: #FFA319;
+    --color-light-orange: #FFAD33;
+    --color-blue: #0066B3;
+    --color-light-blue: #199CFF;
+    --color-font-light: #e1e1e1;
+    --color-font-dark: #1e1e1e;
+  }
+
   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
