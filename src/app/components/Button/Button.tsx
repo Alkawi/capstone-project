@@ -16,5 +16,5 @@ const StyledButton = styled.button`
   border-radius: 8px;
   background-color: var(--color-blue);
   color: var(--color-font-light);
-  border: 1px solid var(--color-light-orange);
+  border: 2px solid var(--color-light-orange);
 `
