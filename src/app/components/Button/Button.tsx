@@ -1,11 +1,20 @@
 import type { ReactNode } from 'react'
 import React from 'react'
+import styled from 'styled-components'
 
 type ButtonProps = {
   children: ReactNode
 }
 function Button({ children }: ButtonProps): JSX.Element {
-  return <button>{children}</button>
+  return <StyledButton>{children}</StyledButton>
 }
 
 export default Button
+
+const StyledButton = styled.button`
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: var(--color-blue);
+  color: var(--color-font-light);
+  border: 1px solid var(--color-light-orange);
+`
