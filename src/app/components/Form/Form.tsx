@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import Button from '../Button/Button'
 
 type Concert = {
   mainAct: string
@@ -77,6 +78,7 @@ export default function Form(): JSX.Element {
           }
         />
       </Label>
+      <Button>Save and go back</Button>
     </AddForm>
   )
 }
