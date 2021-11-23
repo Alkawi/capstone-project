@@ -4,9 +4,10 @@ import styled from 'styled-components'
 
 type ButtonProps = {
   children: ReactNode
+  onClick: () => void
 }
-function Button({ children }: ButtonProps): JSX.Element {
-  return <StyledButton>{children}</StyledButton>
+function Button({ children, onClick }: ButtonProps): JSX.Element {
+  return <StyledButton onClick={onClick}>{children}</StyledButton>
 }
 
 export default Button
