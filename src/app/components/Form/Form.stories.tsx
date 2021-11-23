@@ -6,4 +6,6 @@ export default {
   component: Form,
 }
 
-export const AddForm = (): JSX.Element => <Form />
+export const AddForm = (): JSX.Element => (
+  <Form onSubmit={() => console.log('')} />
+)
