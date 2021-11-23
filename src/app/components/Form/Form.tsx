@@ -10,27 +10,32 @@ type Concert = {
   numberOfTickets: number
 }
 
-export default function Form(): JSX.Element {
-  const [concert, setConcert] = useState<Concert>({
-    mainAct: '',
-    support: '',
-    concertDate: '',
-    location: '',
-    numberOfTickets: 1,
-  })
+type FormProps = {
+  onSubmit: (concert: Concert) => void
+}
+
+export default function Form({ onSubmit }: FormProps): JSX.Element {
+  const [mainAct, setMainAct] = useState<string>('')
+  const [support, setSupport] = useState<string>('')
+  const [concertDate, setConcertDate] = useState<string>('')
+  const [location, setLocation] = useState<string>('')
+  const [numberOfTickets, setNumberOfTickets] = useState<number>(1)
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    onSubmit({ mainAct, support, concertDate, location, numberOfTickets })
+  }
 
   return (
-    <AddForm action="">
+    <AddForm onSubmit={(event) => handleSubmit(event)}>
       <Label>
         Main Act:{' '}
         <Input
           type="text"
           maxLength={100}
           required
-          value={concert.mainAct}
-          onChange={(event) =>
-            setConcert({ ...concert, mainAct: event.target.value })
-          }
+          value={mainAct}
+          onChange={(event) => setMainAct(event.target.value)}
         />
       </Label>
       <Label>
@@ -38,10 +43,8 @@ export default function Form(): JSX.Element {
         <Input
           type="text"
           maxLength={100}
-          value={concert.support}
-          onChange={(event) =>
-            setConcert({ ...concert, support: event.target.value })
-          }
+          value={support}
+          onChange={(event) => setSupport(event.target.value)}
         />
       </Label>
       <Label>
@@ -49,10 +52,8 @@ export default function Form(): JSX.Element {
         <Input
           type="date"
           required
-          value={concert.concertDate}
-          onChange={(event) =>
-            setConcert({ ...concert, concertDate: event.target.value })
-          }
+          value={concertDate}
+          onChange={(event) => setConcertDate(event.target.value)}
         />
       </Label>
       <Label>
@@ -61,10 +62,8 @@ export default function Form(): JSX.Element {
           type="text"
           maxLength={100}
           required
-          value={concert.location}
-          onChange={(event) =>
-            setConcert({ ...concert, location: event.target.value })
-          }
+          value={location}
+          onChange={(event) => setLocation(event.target.value)}
         />
       </Label>
       <Label>
@@ -73,16 +72,11 @@ export default function Form(): JSX.Element {
           type="number"
           min={1}
           required
-          value={concert.numberOfTickets}
-          onChange={(event) =>
-            setConcert({
-              ...concert,
-              numberOfTickets: event.target.valueAsNumber,
-            })
-          }
+          value={numberOfTickets}
+          onChange={(event) => setNumberOfTickets(event.target.valueAsNumber)}
         />
       </Label>
-      <Button>Save and go back</Button>
+      <Button type="submit">Save and go back</Button>
     </AddForm>
   )
 }
@@ -91,6 +85,7 @@ const AddForm = styled.form`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  gap: 1rem;
   background-color: var(--color-orange);
   padding: 20px;
   color: var(--color-font-dark);
