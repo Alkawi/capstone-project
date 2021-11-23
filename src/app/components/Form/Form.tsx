@@ -1,23 +1,33 @@
 import React from 'react'
+import styled from 'styled-components'
 
 export default function Form(): JSX.Element {
   return (
-    <form action="">
-      <label>
+    <AddForm action="">
+      <Label>
         Main Act: <input type="text" required />
-      </label>
-      <label>
+      </Label>
+      <Label>
         Support: <input type="text" />
-      </label>
-      <label>
+      </Label>
+      <Label>
         Date: <input type="date" required />
-      </label>
-      <label>
+      </Label>
+      <Label>
         Location: <input type="text" required />
-      </label>
-      <label>
+      </Label>
+      <Label>
         Number of tickets: <input type="number" required />
-      </label>
-    </form>
+      </Label>
+    </AddForm>
   )
 }
+
+const AddForm = styled.form`
+  display: flex;
+  flex-direction: column;
+`
+const Label = styled.label`
+  display: flex;
+  flex-direction: column;
+`
