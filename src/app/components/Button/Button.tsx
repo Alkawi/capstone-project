@@ -14,7 +14,7 @@ export default Button
 const StyledButton = styled.button`
   padding: 10px 20px;
   border-radius: 8px;
-  background-color: var(--color-blue);
-  color: var(--color-font-light);
-  border: 2px solid var(--color-light-orange);
+  background-color: var(--color-light-orange);
+  color: var(--color-font-dark);
+  border: 2px solid var(--color-blue);
 `
