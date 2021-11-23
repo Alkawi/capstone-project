@@ -25,6 +25,7 @@ export default function Form(): JSX.Element {
         Main Act:{' '}
         <Input
           type="text"
+          maxLength={100}
           required
           value={concert.mainAct}
           onChange={(event) =>
@@ -36,6 +37,7 @@ export default function Form(): JSX.Element {
         Support:{' '}
         <Input
           type="text"
+          maxLength={100}
           value={concert.support}
           onChange={(event) =>
             setConcert({ ...concert, support: event.target.value })
@@ -57,6 +59,7 @@ export default function Form(): JSX.Element {
         Location:{' '}
         <Input
           type="text"
+          maxLength={100}
           required
           value={concert.location}
           onChange={(event) =>
