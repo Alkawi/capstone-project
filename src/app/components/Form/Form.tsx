@@ -71,6 +71,7 @@ export default function Form(): JSX.Element {
         Number of tickets:{' '}
         <Input
           type="number"
+          min={1}
           required
           value={concert.numberOfTickets}
           onChange={(event) =>
