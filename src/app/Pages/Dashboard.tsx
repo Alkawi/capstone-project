@@ -3,6 +3,7 @@ import Button from '../components/Button/Button'
 import Form from '../components/Form/Form'
 import Card from '../components/Card/Card'
 import styled from 'styled-components'
+import useLocalStorage from '../hooks/useLocalStorage'
 
 type Concert = {
   id: string
@@ -15,7 +16,7 @@ type Concert = {
 
 export default function Dashboard(): JSX.Element {
   const [showForm, setShowForm] = useState<boolean>(false)
-  const [concerts, setConcerts] = useState<Concert[]>([])
+  const [concerts, setConcerts] = useLocalStorage<Concert[]>('concerts', [])
 
   function handleSubmit(concert: Concert): void {
     const newConcert = concert
