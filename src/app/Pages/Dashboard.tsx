@@ -31,7 +31,9 @@ export default function Dashboard(): JSX.Element {
     <div>
       {!showForm && (
         <main>
-          <Button onClick={handleClick}>Add concert</Button>
+          <header>
+            <Button onClick={handleClick}>Add concert</Button>
+          </header>
           {concerts.map((concert) => (
             <Card
               key={concert.id}
