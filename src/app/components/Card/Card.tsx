@@ -17,12 +17,23 @@ export default function Card({
   numberOfTickets,
 }: CardProps): JSX.Element {
   return (
-    <article>
+    <CardContainer>
       <h2>{mainAct}</h2>
       {support && <span>Support: {support}</span>}
       <span>{concertDate}</span>
       <span>{location}</span>
       <span>{numberOfTickets} tickets</span>
-    </article>
+    </CardContainer>
   )
 }
+
+const CardContainer = styled.article`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: var(--color-light-orange);
+  color: var(--color-font-dark);
+`
