@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Button from '../components/Button/Button'
 import Form from '../components/Form/Form'
+import Card from '../components/Card/Card'
 
 type Concert = {
   mainAct: string
@@ -27,10 +28,25 @@ export default function Dashboard(): JSX.Element {
 
   return (
     <div>
-      <main>
-        <Button onClick={handleClick}>Add concert</Button>
-      </main>
-      <main>{showForm && <Form onSubmit={handleSubmit} />}</main>
+      {!showForm && (
+        <main>
+          <Button onClick={handleClick}>Add concert</Button>
+          {concerts.map((concert) => (
+            <Card
+              mainAct={concert.mainAct}
+              support={concert.support}
+              concertDate={concert.concertDate}
+              location={concert.location}
+              numberOfTickets={concert.numberOfTickets}
+            />
+          ))}
+        </main>
+      )}
+      {showForm && (
+        <main>
+          <Form onSubmit={handleSubmit} />
+        </main>
+      )}
     </div>
   )
 }
