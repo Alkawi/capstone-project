@@ -18,10 +18,10 @@ export default function Card({
   return (
     <article>
       <h2>{mainAct}</h2>
-      {support && <span>{support}</span>}
+      {support && <span>Support: {support}</span>}
       <span>{concertDate}</span>
       <span>{location}</span>
-      <span>{numberOfTickets}</span>
+      <span>{numberOfTickets} tickets</span>
     </article>
   )
 }
