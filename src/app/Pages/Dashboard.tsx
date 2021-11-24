@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Button from '../components/Button/Button'
 import Form from '../components/Form/Form'
 import Card from '../components/Card/Card'
+import styled from 'styled-components'
 
 type Concert = {
   id: string
@@ -30,10 +31,10 @@ export default function Dashboard(): JSX.Element {
   return (
     <div>
       {!showForm && (
-        <main>
-          <header>
+        <Container>
+          <Header>
             <Button onClick={handleClick}>Add concert</Button>
-          </header>
+          </Header>
           {concerts.map((concert) => (
             <Card
               key={concert.id}
@@ -44,7 +45,7 @@ export default function Dashboard(): JSX.Element {
               numberOfTickets={concert.numberOfTickets}
             />
           ))}
-        </main>
+        </Container>
       )}
       {showForm && (
         <main>
@@ -54,3 +55,16 @@ export default function Dashboard(): JSX.Element {
     </div>
   )
 }
+
+const Header = styled.header`
+  display: flex;
+  flex-direction: row-reverse;
+`
+const Container = styled.main`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100vh;
+  padding: 20px;
+  background-color: var(--color-orange);
+`
