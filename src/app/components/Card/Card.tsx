@@ -1,5 +1,27 @@
 import React from 'react'
 
-export default function Card(): JSX.Element {
-  return <></>
+type CardProps = {
+  mainAct: string
+  support?: string
+  concertDate: string
+  location: string
+  numberOfTickets: number
+}
+
+export default function Card({
+  mainAct,
+  support,
+  concertDate,
+  location,
+  numberOfTickets,
+}: CardProps): JSX.Element {
+  return (
+    <article>
+      <h2>{mainAct}</h2>
+      {support && <span>{support}</span>}
+      <span>{concertDate}</span>
+      <span>{location}</span>
+      <span>{numberOfTickets}</span>
+    </article>
+  )
 }
