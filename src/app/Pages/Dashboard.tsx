@@ -35,16 +35,23 @@ export default function Dashboard(): JSX.Element {
           <Header>
             <Button onClick={handleClick}>Add concert</Button>
           </Header>
-          {concerts.map((concert) => (
-            <Card
-              key={concert.id}
-              mainAct={concert.mainAct}
-              support={concert.support}
-              concertDate={concert.concertDate}
-              location={concert.location}
-              numberOfTickets={concert.numberOfTickets}
-            />
-          ))}
+          {concerts.length > 0 ? (
+            concerts.map((concert) => (
+              <Card
+                key={concert.id}
+                mainAct={concert.mainAct}
+                support={concert.support}
+                concertDate={concert.concertDate}
+                location={concert.location}
+                numberOfTickets={concert.numberOfTickets}
+              />
+            ))
+          ) : (
+            <div>
+              <h2>No concerts available</h2>
+              <p>Please add a concert</p>
+            </div>
+          )}
         </Container>
       )}
       {showForm && (
