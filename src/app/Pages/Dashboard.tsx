@@ -4,6 +4,7 @@ import Form from '../components/Form/Form'
 import Card from '../components/Card/Card'
 
 type Concert = {
+  id: string
   mainAct: string
   support?: string
   concertDate: string
@@ -33,6 +34,7 @@ export default function Dashboard(): JSX.Element {
           <Button onClick={handleClick}>Add concert</Button>
           {concerts.map((concert) => (
             <Card
+              key={concert.id}
               mainAct={concert.mainAct}
               support={concert.support}
               concertDate={concert.concertDate}

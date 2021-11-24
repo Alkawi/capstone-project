@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Button from '../Button/Button'
+import { v4 as uuid } from 'uuid'
 
 type Concert = {
+  id: string
   mainAct: string
   support?: string
   concertDate: string
@@ -15,6 +17,7 @@ type FormProps = {
 }
 
 export default function Form({ onSubmit }: FormProps): JSX.Element {
+  const id = uuid()
   const [mainAct, setMainAct] = useState<string>('')
   const [support, setSupport] = useState<string>('')
   const [concertDate, setConcertDate] = useState<string>('')
@@ -23,7 +26,7 @@ export default function Form({ onSubmit }: FormProps): JSX.Element {
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    onSubmit({ mainAct, support, concertDate, location, numberOfTickets })
+    onSubmit({ id, mainAct, support, concertDate, location, numberOfTickets })
   }
 
   return (
