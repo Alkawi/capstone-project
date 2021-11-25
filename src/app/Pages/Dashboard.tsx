@@ -3,9 +3,10 @@ import Button from '../components/Button/Button'
 import Form from '../components/Form/Form'
 import Card from '../components/Card/Card'
 import styled from 'styled-components'
+import { v4 as uuid } from 'uuid'
 
 type Concert = {
-  id: string
+  id?: string
   mainAct: string
   support?: string
   concertDate: string
@@ -15,12 +16,15 @@ type Concert = {
 
 export default function Dashboard(): JSX.Element {
   const [showForm, setShowForm] = useState<boolean>(false)
-  const [concerts, setConcerts] = useState<Concert[]>([])
+  const [concerts, setConcerts] = useState<Concert[] | null>(null)
 
   function handleSubmit(concert: Concert): void {
-    const newConcert = concert
-
-    setConcerts([...concerts, newConcert])
+    const newConcert = { ...concert, id: uuid() }
+    if (concerts) {
+      setConcerts([...concerts, newConcert])
+    } else {
+      setConcerts([newConcert])
+    }
     setShowForm(false)
   }
 
@@ -35,7 +39,7 @@ export default function Dashboard(): JSX.Element {
           <Header>
             <Button onClick={handleClick}>Add concert</Button>
           </Header>
-          {concerts.length > 0 ? (
+          {concerts &&
             concerts.map((concert) => (
               <Card
                 key={concert.id}
@@ -45,8 +49,8 @@ export default function Dashboard(): JSX.Element {
                 location={concert.location}
                 numberOfTickets={concert.numberOfTickets}
               />
-            ))
-          ) : (
+            ))}
+          {!concerts && (
             <div>
               <h2>No concerts available</h2>
               <p>Please add a concert</p>
