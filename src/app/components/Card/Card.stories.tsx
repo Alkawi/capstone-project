@@ -1,4 +1,5 @@
 import React from 'react'
+import type { Concert } from '../../types'
 import Card from './Card'
 
 export default {
@@ -6,21 +7,24 @@ export default {
   component: Card,
 }
 
-export const CardWithSupport = (): JSX.Element => (
-  <Card
-    mainAct="ZSK"
-    support="Donots"
-    concertDate="2022-02-04"
-    location="zakk Düsseldorf"
-    numberOfTickets={2}
-  />
-)
+const concert: Concert[] = [
+  {
+    mainAct: 'ZSK',
+    support: 'Donots',
+    concertDate: '2022-02-04',
+    location: 'zakk Düsseldorf',
+    numberOfTickets: 2,
+  },
+  {
+    mainAct: 'Radio Havanna',
+    concertDate: '2022-05-03',
+    location: 'Rosenhof Osnabrück',
+    numberOfTickets: 3,
+  },
+]
+
+export const CardWithSupport = (): JSX.Element => <Card concert={concert[0]} />
 
 export const CardWithoutSupport = (): JSX.Element => (
-  <Card
-    mainAct="Radio Havanna"
-    concertDate="2022-05-03"
-    location="Rosenhof Osnabrück"
-    numberOfTickets={3}
-  />
+  <Card concert={concert[1]} />
 )

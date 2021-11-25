@@ -1,15 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Button from '../Button/Button'
-
-type Concert = {
-  id?: string
-  mainAct: string
-  support?: string
-  concertDate: string
-  location: string
-  numberOfTickets: number
-}
+import type { Concert } from '../../types'
 
 type FormProps = {
   onSubmit: (concert: Concert) => void

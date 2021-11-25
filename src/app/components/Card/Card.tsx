@@ -1,28 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
+import type { Concert } from '../../types'
 
 type CardProps = {
-  mainAct: string
-  support?: string
-  concertDate: string
-  location: string
-  numberOfTickets: number
+  concert: Concert
 }
 
-export default function Card({
-  mainAct,
-  support,
-  concertDate,
-  location,
-  numberOfTickets,
-}: CardProps): JSX.Element {
+export default function Card({ concert }: CardProps): JSX.Element {
   return (
     <CardContainer>
-      <h2>{mainAct}</h2>
-      {support && <span>Support: {support}</span>}
-      <span>{concertDate}</span>
-      <span>{location}</span>
-      <span>{numberOfTickets} tickets</span>
+      <h2>{concert.mainAct}</h2>
+      {concert.support && <span>Support: {concert.support}</span>}
+      <span>{concert.concertDate}</span>
+      <span>{concert.location}</span>
+      <span>{concert.numberOfTickets} tickets</span>
     </CardContainer>
   )
 }
