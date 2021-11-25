@@ -75,7 +75,8 @@ export default function Dashboard(): JSX.Element {
 
 const Header = styled.header`
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
+  justify-content: space-between;
 `
 const Container = styled.main`
   display: flex;
