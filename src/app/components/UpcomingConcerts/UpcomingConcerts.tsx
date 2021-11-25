@@ -1,5 +1,4 @@
 import React from 'react'
-import moment from 'moment'
 import styled from 'styled-components'
 
 type Concert = {
@@ -17,8 +16,8 @@ type UpcomingConcertsProps = {
 export default function UpcomingConcerts({
   concerts,
 }: UpcomingConcertsProps): JSX.Element {
-  const numberOfUpcomingConcerts = concerts.filter((concert) =>
-    moment(concert.concertDate).isSameOrAfter(moment())
+  const numberOfUpcomingConcerts = concerts.filter(
+    (concert) => new Date(concert.concertDate) >= new Date()
   ).length
 
   return <Upcoming>Upcoming concerts: {numberOfUpcomingConcerts}</Upcoming>
