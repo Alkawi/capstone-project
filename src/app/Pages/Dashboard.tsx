@@ -42,7 +42,7 @@ export default function Dashboard(): JSX.Element {
       {!showForm && (
         <Container>
           <Header>
-            {concerts && <UpcomingConcerts concerts={concerts} />}
+            <UpcomingConcerts concerts={concerts} />
             <Button onClick={handleClick}>Add concert</Button>
           </Header>
           {concerts &&
@@ -85,4 +85,5 @@ const Container = styled.main`
   height: 100vh;
   padding: 20px;
   background-color: var(--color-orange);
+  overflow-y: scroll;
 `
