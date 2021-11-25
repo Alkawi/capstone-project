@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Button from '../Button/Button'
 
 type Concert = {
+  id?: string
   mainAct: string
   support?: string
   concertDate: string
