@@ -4,9 +4,10 @@ import Form from '../components/Form/Form'
 import Card from '../components/Card/Card'
 import styled from 'styled-components'
 import useLocalStorage from '../hooks/useLocalStorage'
+import { v4 as uuid } from 'uuid'
 
 type Concert = {
-  id: string
+  id?: string
   mainAct: string
   support?: string
   concertDate: string
@@ -19,9 +20,12 @@ export default function Dashboard(): JSX.Element {
   const [concerts, setConcerts] = useLocalStorage<Concert[]>('concerts', [])
 
   function handleSubmit(concert: Concert): void {
-    const newConcert = concert
-
-    setConcerts([...concerts, newConcert])
+    const newConcert = { ...concert, id: uuid() }
+    if (concerts) {
+      setConcerts([...concerts, newConcert])
+    } else {
+      setConcerts([newConcert])
+    }
     setShowForm(false)
   }
 
@@ -36,7 +40,7 @@ export default function Dashboard(): JSX.Element {
           <Header>
             <Button onClick={handleClick}>Add concert</Button>
           </Header>
-          {concerts.length > 0 ? (
+          {concerts &&
             concerts.map((concert) => (
               <Card
                 key={concert.id}
@@ -46,8 +50,8 @@ export default function Dashboard(): JSX.Element {
                 location={concert.location}
                 numberOfTickets={concert.numberOfTickets}
               />
-            ))
-          ) : (
+            ))}
+          {!concerts && (
             <div>
               <h2>No concerts available</h2>
               <p>Please add a concert</p>
