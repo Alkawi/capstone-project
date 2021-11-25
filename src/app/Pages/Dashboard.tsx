@@ -17,7 +17,10 @@ type Concert = {
 
 export default function Dashboard(): JSX.Element {
   const [showForm, setShowForm] = useState<boolean>(false)
-  const [concerts, setConcerts] = useLocalStorage<Concert[]>('concerts', [])
+  const [concerts, setConcerts] = useLocalStorage<Concert[] | null>(
+    'concerts',
+    null
+  )
 
   function handleSubmit(concert: Concert): void {
     const newConcert = { ...concert, id: uuid() }
