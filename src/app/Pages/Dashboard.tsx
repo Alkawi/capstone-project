@@ -39,14 +39,7 @@ export default function Dashboard(): JSX.Element {
           </Header>
           {concerts &&
             concerts.map((concert) => (
-              <Card
-                key={concert.id}
-                mainAct={concert.mainAct}
-                support={concert.support}
-                concertDate={concert.concertDate}
-                location={concert.location}
-                numberOfTickets={concert.numberOfTickets}
-              />
+              <Card key={concert.id} concert={concert} />
             ))}
           {!concerts && (
             <div>
