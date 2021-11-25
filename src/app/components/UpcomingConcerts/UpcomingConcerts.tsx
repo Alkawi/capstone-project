@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 type Concert = {
-  id: string
+  id?: string
   mainAct: string
   support?: string
   concertDate: string
