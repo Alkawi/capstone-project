@@ -1,11 +1,13 @@
 import React from 'react'
 import moment from 'moment'
+import styled from 'styled-components'
 
 type Concert = {
   id: string
   mainAct: string
   support?: string
-  concertDate: Date
+  concertDate: string
+  location: string
   numberOfTickets: number
 }
 
@@ -19,5 +21,9 @@ export default function UpcomingConcerts({
     moment(concert.concertDate).isSameOrAfter(moment())
   ).length
 
-  return <span>Upcoming concerts: {numberOfUpcomingConcerts}</span>
+  return <Upcoming>Upcoming concerts: {numberOfUpcomingConcerts}</Upcoming>
 }
+
+const Upcoming = styled.span`
+  color: var(--color-font-dark);
+`
