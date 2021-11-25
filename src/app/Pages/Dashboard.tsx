@@ -5,6 +5,7 @@ import Card from '../components/Card/Card'
 import styled from 'styled-components'
 import useLocalStorage from '../hooks/useLocalStorage'
 import { v4 as uuid } from 'uuid'
+import UpcomingConcerts from '../components/UpcomingConcerts/UpcomingConcerts'
 
 type Concert = {
   id?: string
@@ -41,6 +42,7 @@ export default function Dashboard(): JSX.Element {
       {!showForm && (
         <Container>
           <Header>
+            {concerts && <UpcomingConcerts concerts={concerts} />}
             <Button onClick={handleClick}>Add concert</Button>
           </Header>
           {concerts &&
