@@ -5,6 +5,7 @@ import Card from '../components/Card/Card'
 import styled from 'styled-components'
 import useLocalStorage from '../hooks/useLocalStorage'
 import { v4 as uuid } from 'uuid'
+import UpcomingConcerts from '../components/UpcomingConcerts/UpcomingConcerts'
 
 type Concert = {
   id?: string
@@ -41,6 +42,7 @@ export default function Dashboard(): JSX.Element {
       {!showForm && (
         <Container>
           <Header>
+            <UpcomingConcerts concerts={concerts} />
             <Button onClick={handleClick}>Add concert</Button>
           </Header>
           {concerts &&
@@ -73,7 +75,8 @@ export default function Dashboard(): JSX.Element {
 
 const Header = styled.header`
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
+  justify-content: space-between;
 `
 const Container = styled.main`
   display: flex;
@@ -82,4 +85,5 @@ const Container = styled.main`
   height: 100vh;
   padding: 20px;
   background-color: var(--color-orange);
+  overflow-y: scroll;
 `

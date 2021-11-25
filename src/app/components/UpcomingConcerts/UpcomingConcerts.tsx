@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 type Concert = {
-  id: string
+  id?: string
   mainAct: string
   support?: string
   concertDate: string
@@ -11,14 +11,15 @@ type Concert = {
 }
 
 type UpcomingConcertsProps = {
-  concerts: Concert[]
+  concerts: Concert[] | null
 }
 export default function UpcomingConcerts({
   concerts,
 }: UpcomingConcertsProps): JSX.Element {
-  const numberOfUpcomingConcerts = concerts.filter(
-    (concert) => new Date(concert.concertDate) >= new Date()
-  ).length
+  const numberOfUpcomingConcerts = concerts
+    ? concerts.filter((concert) => new Date(concert.concertDate) >= new Date())
+        .length
+    : 0
 
   return <Upcoming>Upcoming concerts: {numberOfUpcomingConcerts}</Upcoming>
 }
