@@ -1,14 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-
-type Concert = {
-  id?: string
-  mainAct: string
-  support?: string
-  concertDate: string
-  location: string
-  numberOfTickets: number
-}
+import type { Concert } from '../../types'
 
 type UpcomingConcertsProps = {
   concerts: Concert[] | null

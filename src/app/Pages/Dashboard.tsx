@@ -6,15 +6,7 @@ import styled from 'styled-components'
 import useLocalStorage from '../hooks/useLocalStorage'
 import { v4 as uuid } from 'uuid'
 import UpcomingConcerts from '../components/UpcomingConcerts/UpcomingConcerts'
-
-type Concert = {
-  id?: string
-  mainAct: string
-  support?: string
-  concertDate: string
-  location: string
-  numberOfTickets: number
-}
+import type { Concert } from '../types'
 
 export default function Dashboard(): JSX.Element {
   const [showForm, setShowForm] = useState<boolean>(false)
