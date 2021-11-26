@@ -77,4 +77,5 @@ const MissingConcerts = styled.div`
   border-radius: 8px;
   padding: 20px;
   border: 1px solid var(--color-font-dark);
+  background-color: var(--color-light-orange);
 `
