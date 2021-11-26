@@ -25,7 +25,7 @@ export default function Form({ onSubmit }: FormProps): JSX.Element {
         Main Act:{' '}
         <Input
           type="text"
-          maxLength={100}
+          maxLength={50}
           required
           value={mainAct}
           onChange={(event) => setMainAct(event.target.value)}
@@ -35,7 +35,7 @@ export default function Form({ onSubmit }: FormProps): JSX.Element {
         Support:{' '}
         <Input
           type="text"
-          maxLength={100}
+          maxLength={50}
           value={support}
           onChange={(event) => setSupport(event.target.value)}
         />
@@ -54,7 +54,7 @@ export default function Form({ onSubmit }: FormProps): JSX.Element {
         Location:{' '}
         <Input
           type="text"
-          maxLength={100}
+          maxLength={50}
           required
           value={location}
           onChange={(event) => setLocation(event.target.value)}
@@ -65,6 +65,7 @@ export default function Form({ onSubmit }: FormProps): JSX.Element {
         <Input
           type="number"
           min={1}
+          max={50}
           required
           value={numberOfTickets}
           onChange={(event) => setNumberOfTickets(event.target.valueAsNumber)}
