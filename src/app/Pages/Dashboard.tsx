@@ -42,10 +42,10 @@ export default function Dashboard(): JSX.Element {
               <Card key={concert.id} concert={concert} />
             ))}
           {!concerts && (
-            <div>
+            <MissingConcerts>
               <h2>No concerts available</h2>
               <p>Please add a concert</p>
-            </div>
+            </MissingConcerts>
           )}
         </Container>
       )}
@@ -71,4 +71,10 @@ const Container = styled.main`
   padding: 20px;
   background-color: var(--color-orange);
   overflow-y: scroll;
+`
+const MissingConcerts = styled.div`
+  align-self: center;
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid var(--color-font-dark);
 `
