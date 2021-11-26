@@ -5,9 +5,13 @@ import type { Concert } from '../../types'
 
 type FormProps = {
   onSubmit: (concert: Concert) => void
+  onCancelClick: () => void
 }
 
-export default function Form({ onSubmit }: FormProps): JSX.Element {
+export default function Form({
+  onSubmit,
+  onCancelClick,
+}: FormProps): JSX.Element {
   const [mainAct, setMainAct] = useState<string>('')
   const [support, setSupport] = useState<string>('')
   const [concertDate, setConcertDate] = useState<string>('')
@@ -19,6 +23,15 @@ export default function Form({ onSubmit }: FormProps): JSX.Element {
     onSubmit({ mainAct, support, concertDate, location, numberOfTickets })
   }
 
+  function handleCancelClick() {
+    setMainAct('')
+    setSupport('')
+    setLocation('')
+    setConcertDate('')
+    setNumberOfTickets(1)
+
+    onCancelClick()
+  }
   return (
     <AddForm onSubmit={(event) => handleSubmit(event)}>
       <Label>
@@ -72,6 +85,7 @@ export default function Form({ onSubmit }: FormProps): JSX.Element {
         />
       </Label>
       <Button type="submit">Save and go back</Button>
+      <Button onClick={handleCancelClick}>Cancel</Button>
     </AddForm>
   )
 }
