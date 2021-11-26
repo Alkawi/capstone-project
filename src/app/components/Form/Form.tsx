@@ -44,6 +44,7 @@ export default function Form({ onSubmit }: FormProps): JSX.Element {
         Date:{' '}
         <Input
           type="date"
+          max={'2099-12-31'}
           required
           value={concertDate}
           onChange={(event) => setConcertDate(event.target.value)}
