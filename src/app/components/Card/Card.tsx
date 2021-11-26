@@ -23,6 +23,7 @@ const CardContainer = styled.article`
   flex-direction: column;
   align-items: center;
   gap: 5px;
+  align-self: center;
   border-radius: 8px;
   border: 1px solid var(--color-font-dark);
   padding: 20px;
