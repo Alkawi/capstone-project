@@ -37,16 +37,18 @@ export default function Dashboard(): JSX.Element {
             <UpcomingConcerts concerts={concerts} />
             <Button onClick={handleClick}>Add concert</Button>
           </Header>
-          {concerts &&
-            concerts.map((concert) => (
-              <Card key={concert.id} concert={concert} />
-            ))}
-          {!concerts && (
-            <div>
-              <h2>No concerts available</h2>
-              <p>Please add a concert</p>
-            </div>
-          )}
+          <CardContainer>
+            {concerts &&
+              concerts.map((concert) => (
+                <Card key={concert.id} concert={concert} />
+              ))}
+            {!concerts && (
+              <MissingConcerts>
+                <h2>No concerts available</h2>
+                <p>Please add a concert</p>
+              </MissingConcerts>
+            )}
+          </CardContainer>
         </Container>
       )}
       {showForm && (
@@ -64,11 +66,22 @@ const Header = styled.header`
   justify-content: space-between;
 `
 const Container = styled.main`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
   height: 100vh;
+  display: grid;
+  gap: 1rem;
+  grid-template-rows: auto 1fr;
   padding: 20px;
   background-color: var(--color-orange);
-  overflow-y: scroll;
+`
+const MissingConcerts = styled.article`
+  align-self: center;
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid var(--color-font-dark);
+  background-color: var(--color-light-orange);
+`
+const CardContainer = styled.div`
+  display: grid;
+  overflow-y: auto;
+  gap: 1rem;
 `

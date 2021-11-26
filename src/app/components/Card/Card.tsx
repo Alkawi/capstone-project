@@ -11,9 +11,11 @@ export default function Card({ concert }: CardProps): JSX.Element {
     <CardContainer>
       <h2>{concert.mainAct}</h2>
       {concert.support && <span>Support: {concert.support}</span>}
-      <span>{concert.concertDate}</span>
+      <span>{new Date(concert.concertDate).toLocaleString()}</span>
       <span>{concert.location}</span>
-      <span>{concert.numberOfTickets} tickets</span>
+      <span>
+        {concert.numberOfTickets} ticket{concert.numberOfTickets > 1 ? 's' : ''}
+      </span>
     </CardContainer>
   )
 }
@@ -23,7 +25,9 @@ const CardContainer = styled.article`
   flex-direction: column;
   align-items: center;
   gap: 5px;
+  align-self: center;
   border-radius: 8px;
+  border: 1px solid var(--color-font-dark);
   padding: 20px;
   background-color: var(--color-light-orange);
   color: var(--color-font-dark);
