@@ -24,6 +24,7 @@ const CardContainer = styled.article`
   align-items: center;
   gap: 5px;
   border-radius: 8px;
+  border: 1px solid var(--color-font-dark);
   padding: 20px;
   background-color: var(--color-light-orange);
   color: var(--color-font-dark);
