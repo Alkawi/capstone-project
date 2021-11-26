@@ -72,7 +72,7 @@ const Container = styled.main`
   background-color: var(--color-orange);
   overflow-y: scroll;
 `
-const MissingConcerts = styled.div`
+const MissingConcerts = styled.article`
   align-self: center;
   border-radius: 8px;
   padding: 20px;
