@@ -11,7 +11,7 @@ export default function Card({ concert }: CardProps): JSX.Element {
     <CardContainer>
       <h2>{concert.mainAct}</h2>
       {concert.support && <span>Support: {concert.support}</span>}
-      <span>{new Date(concert.concertDate).toLocaleDateString()}</span>
+      <span>{new Date(concert.concertDate).toLocaleString()}</span>
       <span>{concert.location}</span>
       <span>{concert.numberOfTickets} tickets</span>
     </CardContainer>
