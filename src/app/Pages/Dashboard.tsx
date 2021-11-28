@@ -53,7 +53,10 @@ export default function Dashboard(): JSX.Element {
       )}
       {showForm && (
         <main>
-          <Form onSubmit={handleSubmit} />
+          <Form
+            onSubmit={handleSubmit}
+            onCancelClick={() => setShowForm(false)}
+          />
         </main>
       )}
     </div>
