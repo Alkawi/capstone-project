@@ -26,7 +26,7 @@ export default function UserForm({
     <FormContainer onSubmit={(event) => handleSubmit(event)}>
       {formType !== 'Update' ? (
         <InputContainer>
-          <label>
+          <Label>
             Username:
             <Input
               type="text"
@@ -36,8 +36,8 @@ export default function UserForm({
               value={username}
               onChange={(event) => setUsername(event.target.value)}
             />
-          </label>
-          <label>
+          </Label>
+          <Label>
             Password:
             <Input
               type="password"
@@ -47,11 +47,11 @@ export default function UserForm({
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
-          </label>
+          </Label>
         </InputContainer>
       ) : (
         <InputContainer>
-          <label>
+          <Label>
             Old password:
             <Input
               type="password"
@@ -61,8 +61,8 @@ export default function UserForm({
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
-          </label>
-          <label>
+          </Label>
+          <Label>
             New password:
             <Input
               type="password"
@@ -72,7 +72,7 @@ export default function UserForm({
               value={newPassword}
               onChange={(event) => setNewPassword(event.target.value)}
             />
-          </label>
+          </Label>
         </InputContainer>
       )}
       <Button>{formType}</Button>
@@ -97,4 +97,8 @@ const Input = styled.input`
   border: 0;
   border-radius: 5px;
   height: 1.5rem;
+`
+const Label = styled.label`
+  display: flex;
+  flex-direction: column;
 `
