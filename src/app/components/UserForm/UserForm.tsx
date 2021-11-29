@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Button from '../Button/Button'
+import styled from 'styled-components'
 
 type UserFormProps = {
   formType: 'Login' | 'Register' | 'Update'
@@ -22,12 +23,12 @@ export default function UserForm({
   }
 
   return (
-    <form onSubmit={(event) => handleSubmit(event)}>
+    <FormContainer onSubmit={(event) => handleSubmit(event)}>
       {formType !== 'Update' ? (
-        <div>
+        <InputContainer>
           <label>
             Username:
-            <input
+            <Input
               type="text"
               minLength={5}
               maxLength={25}
@@ -38,7 +39,7 @@ export default function UserForm({
           </label>
           <label>
             Password:
-            <input
+            <Input
               type="password"
               minLength={8}
               maxLength={64}
@@ -47,12 +48,12 @@ export default function UserForm({
               onChange={(event) => setPassword(event.target.value)}
             />
           </label>
-        </div>
+        </InputContainer>
       ) : (
-        <div>
+        <InputContainer>
           <label>
             Old password:
-            <input
+            <Input
               type="password"
               minLength={8}
               maxLength={64}
@@ -63,7 +64,7 @@ export default function UserForm({
           </label>
           <label>
             New password:
-            <input
+            <Input
               type="password"
               minLength={8}
               maxLength={64}
@@ -72,9 +73,28 @@ export default function UserForm({
               onChange={(event) => setNewPassword(event.target.value)}
             />
           </label>
-        </div>
+        </InputContainer>
       )}
       <Button>{formType}</Button>
-    </form>
+    </FormContainer>
   )
 }
+
+const FormContainer = styled.form`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--color-orange);
+  padding: 20px;
+  color: var(--color-font-dark);
+  font-size: 1.5rem;
+`
+const InputContainer = styled.div`
+  display: contents;
+`
+const Input = styled.input`
+  border: 0;
+  border-radius: 5px;
+  height: 1.5rem;
+`
