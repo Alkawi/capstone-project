@@ -7,8 +7,5 @@ export default {
 }
 
 export const AddForm = (): JSX.Element => (
-  <Form
-    onSubmit={() => console.log('Submitted')}
-    onCancelClick={() => console.log('Canceled')}
-  />
+  <Form onSubmit={() => console.log('Submitted')} />
 )
