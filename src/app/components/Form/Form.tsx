@@ -91,7 +91,6 @@ export default function Form({
 }
 
 const AddForm = styled.form`
-  height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 1rem;
