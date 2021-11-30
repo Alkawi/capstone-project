@@ -1,64 +1,37 @@
-import React, { useState } from 'react'
-import Button from '../components/Button/Button'
-import Form from '../components/Form/Form'
+import React from 'react'
 import Card from '../components/Card/Card'
 import styled from 'styled-components'
 import useLocalStorage from '../hooks/useLocalStorage'
-import { v4 as uuid } from 'uuid'
 import UpcomingConcerts from '../components/UpcomingConcerts/UpcomingConcerts'
 import type { Concert } from '../types'
+import Button from '../components/Button/Button'
+import { Link } from 'react-router-dom'
 
 export default function Dashboard(): JSX.Element {
-  const [showForm, setShowForm] = useState<boolean>(false)
-  const [concerts, setConcerts] = useLocalStorage<Concert[] | null>(
-    'concerts',
-    null
-  )
-
-  function handleSubmit(concert: Concert): void {
-    const newConcert = { ...concert, id: uuid() }
-    if (concerts) {
-      setConcerts([...concerts, newConcert])
-    } else {
-      setConcerts([newConcert])
-    }
-    setShowForm(false)
-  }
-
-  function handleClick(): void {
-    setShowForm(true)
-  }
+  const [concerts] = useLocalStorage<Concert[] | null>('concerts', null)
 
   return (
     <div>
-      {!showForm && (
-        <Container>
-          <Header>
-            <UpcomingConcerts concerts={concerts} />
-            <Button onClick={handleClick}>Add concert</Button>
-          </Header>
-          <CardContainer>
-            {concerts &&
-              concerts.map((concert) => (
-                <Card key={concert.id} concert={concert} />
-              ))}
-            {!concerts && (
-              <MissingConcerts>
-                <h2>No concerts available</h2>
-                <p>Please add a concert</p>
-              </MissingConcerts>
-            )}
-          </CardContainer>
-        </Container>
-      )}
-      {showForm && (
-        <main>
-          <Form
-            onSubmit={handleSubmit}
-            onCancelClick={() => setShowForm(false)}
-          />
-        </main>
-      )}
+      <Container>
+        <Header>
+          <UpcomingConcerts concerts={concerts} />
+          <Link to="/addConcert">
+            <Button>Add concert</Button>
+          </Link>
+        </Header>
+        <CardContainer>
+          {concerts &&
+            concerts.map((concert) => (
+              <Card key={concert.id} concert={concert} />
+            ))}
+          {!concerts && (
+            <MissingConcerts>
+              <h2>No concerts available</h2>
+              <p>Please add a concert</p>
+            </MissingConcerts>
+          )}
+        </CardContainer>
+      </Container>
     </div>
   )
 }
