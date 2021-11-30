@@ -81,12 +81,11 @@ export default function UserForm({
 }
 
 const FormContainer = styled.form`
-  height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   background-color: var(--color-orange);
-  padding: 20px;
+  padding: 1rem;
   color: var(--color-font-dark);
   font-size: 1.5rem;
 `
