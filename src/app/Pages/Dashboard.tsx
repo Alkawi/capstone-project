@@ -42,17 +42,15 @@ const Header = styled.header`
   justify-content: space-between;
 `
 const Container = styled.main`
-  height: 100vh;
   display: grid;
   gap: 1rem;
   grid-template-rows: auto 1fr;
-  padding: 20px;
-  background-color: var(--color-orange);
+  padding: 1rem;
 `
 const MissingConcerts = styled.article`
   align-self: center;
   border-radius: 8px;
-  padding: 20px;
+  padding: 1rem;
   border: 1px solid var(--color-font-dark);
   background-color: var(--color-light-orange);
 `

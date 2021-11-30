@@ -81,7 +81,6 @@ export default function Form({ onSubmit }: FormProps): JSX.Element {
 }
 
 const AddForm = styled.form`
-  height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 1rem;

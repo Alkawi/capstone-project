@@ -24,11 +24,11 @@ const CardContainer = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 0.5rem;
   align-self: center;
   border-radius: 8px;
   border: 1px solid var(--color-font-dark);
-  padding: 20px;
+  padding: 1rem;
   background-color: var(--color-light-orange);
   color: var(--color-font-dark);
 `
