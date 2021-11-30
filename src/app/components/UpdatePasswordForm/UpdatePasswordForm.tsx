@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Button from '../Button/Button'
 
 type UpdatePasswordFormProps = {
-  onSubmit: (username: string, password: string, newPassword?: string) => void
+  onSubmit: (username: string, password: string, newPassword: string) => void
   username: string
 }
 

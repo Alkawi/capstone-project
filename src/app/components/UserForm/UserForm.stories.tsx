@@ -14,11 +14,9 @@ function handleRegisterSubmit(username: string, password: string): void {
   console.log(`Registered ${username}, ${password}`)
 }
 
-
 export const UserFormLogin = (): JSX.Element => (
   <UserForm formType="Login" onSubmit={handleLoginSubmit} />
 )
 export const UserFormRegister = (): JSX.Element => (
   <UserForm formType="Register" onSubmit={handleRegisterSubmit} />
 )
-
