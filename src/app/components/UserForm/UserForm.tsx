@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 type UserFormProps = {
   formType: 'Login' | 'Register'
-  onSubmit: (username: string, password: string, newPassword?: string) => void
+  onSubmit: (username: string, password: string) => void
 }
 
 export default function UserForm({
