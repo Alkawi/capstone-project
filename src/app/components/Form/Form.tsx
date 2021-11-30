@@ -2,16 +2,13 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Button from '../Button/Button'
 import type { Concert } from '../../types'
+import { Link } from 'react-router-dom'
 
 type FormProps = {
   onSubmit: (concert: Concert) => void
-  onCancelClick: () => void
 }
 
-export default function Form({
-  onSubmit,
-  onCancelClick,
-}: FormProps): JSX.Element {
+export default function Form({ onSubmit }: FormProps): JSX.Element {
   const [mainAct, setMainAct] = useState<string>('')
   const [support, setSupport] = useState<string>('')
   const [concertDate, setConcertDate] = useState<string>('')
@@ -23,15 +20,6 @@ export default function Form({
     onSubmit({ mainAct, support, concertDate, location, numberOfTickets })
   }
 
-  function handleCancelClick() {
-    setMainAct('')
-    setSupport('')
-    setLocation('')
-    setConcertDate('')
-    setNumberOfTickets(1)
-
-    onCancelClick()
-  }
   return (
     <AddForm onSubmit={(event) => handleSubmit(event)}>
       <Label>
@@ -85,7 +73,9 @@ export default function Form({
         />
       </Label>
       <Button type="submit">Save and go back</Button>
-      <Button onClick={handleCancelClick}>Cancel</Button>
+      <HomeLink to="/">
+        <Button>Cancel</Button>
+      </HomeLink>
     </AddForm>
   )
 }
@@ -108,4 +98,7 @@ const Input = styled.input`
   border: 0;
   border-radius: 5px;
   height: 1.5rem;
+`
+const HomeLink = styled(Link)`
+  display: contents;
 `
