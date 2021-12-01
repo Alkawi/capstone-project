@@ -13,7 +13,7 @@ export default function Register(): JSX.Element {
       <Heading>Registration</Heading>
       <UserForm formType="Register" onSubmit={handleSubmit} />
       <LinkContainer>
-        <Link to="login">Log in</Link> to an existing account
+        <Link to="/login">Log in</Link> to an existing account
       </LinkContainer>
     </RegistrationContainer>
   )
