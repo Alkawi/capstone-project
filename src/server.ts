@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import express from 'express'
+import { connectDatabase, getUserCollection } from './app/utils/database'
 
 const app = express()
 const port = process.env.PORT || 3001
