@@ -13,6 +13,21 @@ const port = process.env.PORT || 3001
 
 app.use(express.json())
 
+app.post('/register/', async (req, res) => {
+  const newUser = req.body
+  const existingUser = await getUserCollection().findOne({
+    username: newUser.username,
+  })
+  if (existingUser) {
+    res
+      .status(409)
+      .send(`Account with username ${newUser.username} already exists!`)
+  } else {
+    await getUserCollection().insertOne(newUser)
+    res.send(`Account was created`)
+  }
+})
+
 app.get('/api/hello', (_request, response) => {
   response.json({ message: 'Hello API!' })
 })
