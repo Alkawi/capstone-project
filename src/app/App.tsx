@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AddConcerts from './Pages/AddConcerts'
 import Dashboard from './Pages/Dashboard'
 import Login from './Pages/Login'
+import Register from './Pages/Register'
 
 function App(): JSX.Element {
   return (
@@ -11,6 +12,7 @@ function App(): JSX.Element {
         <Route path="/" element={<Dashboard />} />
         <Route path="addConcert" element={<AddConcerts />} />
         <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   )
