@@ -1,11 +1,24 @@
 import React from 'react'
 import UserForm from '../components/UserForm/UserForm'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Register(): JSX.Element {
-  function handleSubmit(username: string, password: string) {
-    console.log(`Registered ${username} with pw ${password}`)
+  const navigate = useNavigate()
+
+  async function handleSubmit(username: string, password: string) {
+    const response = await fetch('/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password, concerts: {} }),
+    })
+    if (response.status === 200) {
+      navigate('/login')
+    } else {
+      console.log('Fehler')
+    }
   }
 
   return (

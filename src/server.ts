@@ -24,7 +24,7 @@ app.post('/register/', async (req, res) => {
       .send(`Account with username ${newUser.username} already exists!`)
   } else {
     await getUserCollection().insertOne(newUser)
-    res.send(`Account was created`)
+    res.status(200).send(`Account was created`)
   }
 })
 
@@ -40,6 +40,8 @@ app.get('*', (_request, response) => {
   response.sendFile('index.html', { root: 'dist/app' })
 })
 
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}!`)
+connectDatabase(process.env.MONGODB_URI).then(() => {
+  app.listen(port, () => {
+    console.log(`Server listening on port ${port}!`)
+  })
 })
