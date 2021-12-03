@@ -28,6 +28,19 @@ app.post('/register/', async (req, res) => {
   }
 })
 
+app.post('/login', async (req, res) => {
+  const user = req.body
+  const existingUser = await getUserCollection().findOne(
+    { username: user.username },
+    { projection: { _id: 0, username: 1, password: 1 } }
+  )
+  if (existingUser && existingUser.password === user.password) {
+    res.status(200).send('Login successful')
+  } else {
+    res.status(403).send('Incorrect username or passwort')
+  }
+})
+
 app.get('/api/hello', (_request, response) => {
   response.json({ message: 'Hello API!' })
 })
