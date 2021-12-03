@@ -1,11 +1,25 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import UserForm from '../components/UserForm/UserForm'
 
 export default function Login(): JSX.Element {
-  function handleSubmit(username: string, password: string) {
-    console.log(`Logged in ${username} with pw ${password}`)
+  const navigate = useNavigate()
+
+  async function handleSubmit(username: string, password: string) {
+    const response = await fetch('login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    })
+
+    if (response.status === 200) {
+      navigate('/')
+    } else {
+      alert('Invalid login credentials')
+    }
   }
 
   return (
