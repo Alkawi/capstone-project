@@ -12,12 +12,12 @@ export default function Register(): JSX.Element {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, password, concerts: {} }),
+      body: JSON.stringify({ username, password }),
     })
     if (response.status === 200) {
       navigate('/login')
     } else {
-      console.log('Fehler')
+      alert('Fehler bei der Registrierung!')
     }
   }
 
