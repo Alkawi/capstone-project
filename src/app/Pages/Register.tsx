@@ -17,7 +17,7 @@ export default function Register(): JSX.Element {
     if (response.status === 200) {
       navigate('/login')
     } else {
-      alert('Fehler bei der Registrierung!')
+      alert("User account couldn't be added")
     }
   }
 
