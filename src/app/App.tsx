@@ -9,8 +9,10 @@ function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="addConcert" element={<AddConcerts />} />
+        <Route path="/">
+          <Route path=":username" element={<Dashboard />} />
+          <Route path=":username/addConcert" element={<AddConcerts />} />
+        </Route>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
       </Routes>
