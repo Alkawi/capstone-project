@@ -14,7 +14,7 @@ export default function Register(): JSX.Element {
       },
       body: JSON.stringify({ username, password }),
     })
-    if (response.status === 200) {
+    if (response.status === 201) {
       navigate('/login')
     } else {
       alert("User account couldn't be added")
