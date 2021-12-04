@@ -67,6 +67,26 @@ app.patch('/:username/concerts/add', async (req, res) => {
   }
 })
 
+app.get('/:username/concerts', async (req, res) => {
+  const username = req.params.username
+  const existingConcerts = await getUserCollection().findOne(
+    {
+      username,
+    },
+    {
+      projection: {
+        _id: 0,
+        concerts: 1,
+      },
+    }
+  )
+  if (existingConcerts) {
+    res.status(200).send(existingConcerts.concerts)
+  } else {
+    res.status(200).send(null)
+  }
+})
+
 app.get('/api/hello', (_request, response) => {
   response.json({ message: 'Hello API!' })
 })
