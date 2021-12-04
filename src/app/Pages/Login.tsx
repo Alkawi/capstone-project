@@ -16,7 +16,7 @@ export default function Login(): JSX.Element {
     })
 
     if (response.status === 200) {
-      navigate('/')
+      navigate(`/${username}`)
     } else {
       alert('Invalid login credentials')
     }
