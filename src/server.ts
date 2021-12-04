@@ -3,6 +3,7 @@ dotenv.config()
 
 import express from 'express'
 import { connectDatabase, getUserCollection } from './app/utils/database'
+import { nanoid } from 'nanoid'
 
 if (!process.env.MONGODB_URI) {
   throw new Error("Couldn't connect to the database")
@@ -24,7 +25,7 @@ app.post('/register/', async (req, res) => {
       .send(`Account with username ${newUser.username} already exists!`)
   } else {
     await getUserCollection().insertOne(newUser)
-    res.status(200).send(`Account was created`)
+    res.status(201).send(`Account was created`)
   }
 })
 
@@ -38,6 +39,31 @@ app.post('/login', async (req, res) => {
     res.status(200).send('Login successful')
   } else {
     res.status(403).send('Incorrect username or passwort')
+  }
+})
+
+app.patch('/:username/concerts/add', async (req, res) => {
+  const username = req.params.username
+  const concert = { id: nanoid(), ...req.body }
+  const insertedConcert = await getUserCollection().updateOne(
+    { username },
+    {
+      $push: {
+        concerts: {
+          id: concert.id,
+          mainAct: concert.mainAct,
+          support: concert.support,
+          concertDate: concert.concertDate,
+          location: concert.location,
+          numberOfTickets: concert.numberOfTickets,
+        },
+      },
+    }
+  )
+  if (insertedConcert.modifiedCount > 0) {
+    res.status(200).send('Concerts was added')
+  } else {
+    res.status(204)
   }
 })
 
