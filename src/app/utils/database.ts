@@ -1,21 +1,13 @@
 import type { Collection } from 'mongodb'
+import type { Concert } from '../types'
 import { MongoClient } from 'mongodb'
 
 let client: MongoClient
 
-interface Concerts {
-  id: string
-  mainAct: string
-  support?: string
-  concertDate: string
-  location: string
-  numberOfTickets: number
-}
-
 interface User {
   username: string
   password: string
-  concerts?: Concerts[]
+  concerts?: Concert[]
 }
 
 export async function connectDatabase(url: string): Promise<void> {
