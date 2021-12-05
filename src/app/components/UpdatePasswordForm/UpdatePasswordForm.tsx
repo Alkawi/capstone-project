@@ -3,13 +3,11 @@ import styled from 'styled-components'
 import Button from '../Button/Button'
 
 type UpdatePasswordFormProps = {
-  onSubmit: (username: string, password: string, newPassword: string) => void
-  username: string
+  onSubmit: (password: string, newPassword: string) => void
 }
 
 export default function UpdatePasswordForm({
   onSubmit,
-  username,
 }: UpdatePasswordFormProps): JSX.Element {
   const [oldPassword, setOldPassword] = useState<string>('')
   const [newPassword, setNewPassword] = useState<string>('')
@@ -17,7 +15,7 @@ export default function UpdatePasswordForm({
   function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
     event.preventDefault()
 
-    onSubmit(username, oldPassword, newPassword)
+    onSubmit(oldPassword, newPassword)
   }
   return (
     <FormContainer onSubmit={(event) => handleSubmit(event)}>
