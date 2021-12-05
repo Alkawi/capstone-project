@@ -1,21 +1,22 @@
 import React from 'react'
 import Card from '../components/Card/Card'
 import styled from 'styled-components'
-import useLocalStorage from '../hooks/useLocalStorage'
 import UpcomingConcerts from '../components/UpcomingConcerts/UpcomingConcerts'
 import type { Concert } from '../types'
 import Button from '../components/Button/Button'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import useFetch from '../hooks/useFetch'
 
 export default function Dashboard(): JSX.Element {
-  const [concerts] = useLocalStorage<Concert[] | null>('concerts', null)
+  const { username } = useParams()
+  const concerts = useFetch<Concert[]>(`/${username}/concerts`)
 
   return (
     <div>
       <Container>
         <Header>
           <UpcomingConcerts concerts={concerts} />
-          <Link to="/addConcert">
+          <Link to={`/${username}/addConcert`}>
             <Button>Add concert</Button>
           </Link>
         </Header>

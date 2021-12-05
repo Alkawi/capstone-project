@@ -1,24 +1,26 @@
 import React from 'react'
 import Form from '../components/Form/Form'
 import type { Concert } from '../types'
-import { v4 as uuid } from 'uuid'
-import useLocalStorage from '../hooks/useLocalStorage'
-import { useNavigate } from 'react-router'
+
+import { useNavigate, useParams } from 'react-router'
 
 export default function AddConcerts(): JSX.Element {
   const navigate = useNavigate()
-  const [concerts, setConcerts] = useLocalStorage<Concert[] | null>(
-    'concerts',
-    null
-  )
-  function handleSubmit(concert: Concert): void {
-    const newConcert = { ...concert, id: uuid() }
-    if (concerts) {
-      setConcerts([...concerts, newConcert])
+  const { username } = useParams()
+
+  async function handleSubmit(concert: Concert): Promise<void> {
+    const response = await fetch(`/${username}/concerts/add`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(concert),
+    })
+    if (response.status === 200) {
+      navigate(`/${username}`)
     } else {
-      setConcerts([newConcert])
+      alert("Concert couldn't be added")
     }
-    navigate('/')
   }
 
   return (

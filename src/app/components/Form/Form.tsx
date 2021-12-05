@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Button from '../Button/Button'
 import type { Concert } from '../../types'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 type FormProps = {
   onSubmit: (concert: Concert) => void
@@ -14,7 +14,7 @@ export default function Form({ onSubmit }: FormProps): JSX.Element {
   const [concertDate, setConcertDate] = useState<string>('')
   const [location, setLocation] = useState<string>('')
   const [numberOfTickets, setNumberOfTickets] = useState<number>(1)
-
+  const { username } = useParams()
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     onSubmit({ mainAct, support, concertDate, location, numberOfTickets })
@@ -73,7 +73,7 @@ export default function Form({ onSubmit }: FormProps): JSX.Element {
         />
       </Label>
       <Button type="submit">Save and go back</Button>
-      <HomeLink to="/">
+      <HomeLink to={`/${username}`}>
         <Button>Cancel</Button>
       </HomeLink>
     </AddForm>
