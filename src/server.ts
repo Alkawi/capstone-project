@@ -87,10 +87,6 @@ app.get('/:username/concerts', async (req, res) => {
   }
 })
 
-app.get('/api/hello', (_request, response) => {
-  response.json({ message: 'Hello API!' })
-})
-
 app.use('/storybook', express.static('dist/storybook'))
 
 app.use(express.static('dist/app'))
