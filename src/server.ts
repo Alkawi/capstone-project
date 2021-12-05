@@ -61,7 +61,7 @@ app.patch('/:username/concerts/add', async (req, res) => {
     }
   )
   if (insertedConcert.modifiedCount > 0) {
-    res.status(200).send('Concerts was added')
+    res.status(200)
   } else {
     res.status(204)
   }
