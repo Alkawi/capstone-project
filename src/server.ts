@@ -56,6 +56,15 @@ app.post('/login', async (req, res) => {
   }
 })
 
+app.get('/logout', async (req, res) => {
+  const username = req.cookies.username
+  if (username) {
+    res.clearCookie('username')
+  } else {
+    res.send('No user is logged in')
+  }
+})
+
 app.patch('/:username/concerts/add', async (req, res) => {
   const username = req.params.username
   const concert = { id: nanoid(), ...req.body }
