@@ -2,6 +2,8 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import express from 'express'
+import cookieParser from 'cookie-parser'
+
 import { connectDatabase, getUserCollection } from './app/utils/database'
 import { nanoid } from 'nanoid'
 
@@ -13,6 +15,7 @@ const app = express()
 const port = process.env.PORT || 3001
 
 app.use(express.json())
+app.use(cookieParser())
 
 app.post('/register/', async (req, res) => {
   const newUser = req.body
@@ -36,6 +39,7 @@ app.post('/login', async (req, res) => {
     { projection: { _id: 0, username: 1, password: 1 } }
   )
   if (existingUser && existingUser.password === user.password) {
+    res.setHeader('Set-Cookie', `username=${existingUser.username}`)
     res.status(200).send('Login successful')
   } else {
     res.status(403).send('Incorrect username or passwort')
