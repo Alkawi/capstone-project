@@ -67,26 +67,30 @@ app.get('/logout', async (req, res) => {
 
 app.patch('/:username/concerts/add', async (req, res) => {
   const username = req.params.username
-  const concert = { id: nanoid(), ...req.body }
-  const insertedConcert = await getUserCollection().updateOne(
-    { username },
-    {
-      $push: {
-        concerts: {
-          id: concert.id,
-          mainAct: concert.mainAct,
-          support: concert.support,
-          concertDate: concert.concertDate,
-          location: concert.location,
-          numberOfTickets: concert.numberOfTickets,
-        },
-      },
-    }
-  )
-  if (insertedConcert.modifiedCount > 0) {
-    res.status(200)
+  if (username !== req.cookies.username) {
+    res.status(403)
   } else {
-    res.status(204)
+    const concert = { id: nanoid(), ...req.body }
+    const insertedConcert = await getUserCollection().updateOne(
+      { username },
+      {
+        $push: {
+          concerts: {
+            id: concert.id,
+            mainAct: concert.mainAct,
+            support: concert.support,
+            concertDate: concert.concertDate,
+            location: concert.location,
+            numberOfTickets: concert.numberOfTickets,
+          },
+        },
+      }
+    )
+    if (insertedConcert.modifiedCount > 0) {
+      res.status(200)
+    } else {
+      res.status(204)
+    }
   }
 })
 
