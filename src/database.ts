@@ -1,5 +1,5 @@
 import type { Collection } from 'mongodb'
-import type { Concert } from '../types'
+import type { Concert } from './app/types'
 import { MongoClient } from 'mongodb'
 
 let client: MongoClient
