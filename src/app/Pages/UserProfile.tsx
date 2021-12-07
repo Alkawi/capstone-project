@@ -1,10 +1,10 @@
 import React from 'react'
-import { /*useNavigate,*/ useParams } from 'react-router'
+import { useParams } from 'react-router'
 import UpdatePasswordForm from '../components/UpdatePasswordForm/UpdatePasswordForm'
+import styled from 'styled-components'
 
 export default function UserProfile(): JSX.Element {
   const { username } = useParams()
-  //const navigate = useNavigate()
 
   async function handleSubmit(password: string, newPassword: string) {
     const response = await fetch(`/${username}/changePassword`, {
@@ -23,9 +23,17 @@ export default function UserProfile(): JSX.Element {
   }
 
   return (
-    <div>
-      <h1>Profile</h1>
+    <PageContainer>
+      <Heading>Profile</Heading>
       <UpdatePasswordForm onSubmit={handleSubmit} />
-    </div>
+    </PageContainer>
   )
 }
+
+const PageContainer = styled.div`
+  padding: 1rem;
+  display: grid;
+`
+const Heading = styled.h1`
+  justify-self: center;
+`
