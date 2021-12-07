@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import express from 'express'
-import { connectDatabase, getUserCollection } from './app/utils/database'
+import { connectDatabase, getUserCollection } from './database'
 import { nanoid } from 'nanoid'
 
 if (!process.env.MONGODB_URI) {
@@ -84,6 +84,20 @@ app.get('/:username/concerts', async (req, res) => {
     res.status(200).send(existingConcerts.concerts)
   } else {
     res.status(200).send(null)
+  }
+})
+
+app.patch('/:username/changePassword', async (req, res) => {
+  const username = req.params.username
+  const { password, newPassword } = req.body
+  const updatePw = await getUserCollection().updateOne(
+    { username, password },
+    { $set: { password: newPassword } }
+  )
+  if (updatePw.modifiedCount > 0) {
+    res.sendStatus(200)
+  } else {
+    res.sendStatus(403)
   }
 })
 
