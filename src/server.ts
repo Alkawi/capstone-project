@@ -17,6 +17,16 @@ const port = process.env.PORT || 3001
 app.use(express.json())
 app.use(cookieParser())
 
+app.get('/', async (req, res) => {
+  const username = req.cookies.username
+  const foundUser = await getUserCollection().findOne({ username })
+  if (foundUser) {
+    res.redirect(`/${username}`)
+  } else {
+    res.redirect('/login')
+  }
+})
+
 app.post('/register/', async (req, res) => {
   const newUser = req.body
   const existingUser = await getUserCollection().findOne({
