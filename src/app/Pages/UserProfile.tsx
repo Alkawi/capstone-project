@@ -4,6 +4,7 @@ import UpdatePasswordForm from '../components/UpdatePasswordForm/UpdatePasswordF
 import styled from 'styled-components'
 import useFetch from '../hooks/useFetch'
 import type { Concert } from '../types'
+import Button from '../components/Button/Button'
 
 export default function UserProfile(): JSX.Element {
   const { username } = useParams()
@@ -25,6 +26,16 @@ export default function UserProfile(): JSX.Element {
     }
   }
 
+  async function handleClick() {
+    await fetch('/logout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: null,
+    })
+  }
+
   return (
     <PageContainer>
       <Heading>Profile</Heading>
@@ -32,6 +43,7 @@ export default function UserProfile(): JSX.Element {
       <TotalConcerts>
         Total concerts: {concerts ? concerts.length : 0}
       </TotalConcerts>
+      <Button onClick={() => handleClick()}>Logout</Button>
     </PageContainer>
   )
 }

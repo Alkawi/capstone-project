@@ -11,16 +11,6 @@ export default function Dashboard(): JSX.Element {
   const { username } = useParams()
   const concerts = useFetch<Concert[]>(`/${username}/concerts`)
 
-  async function handleClick() {
-    await fetch('/logout', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: null,
-    })
-  }
-
   return (
     <div>
       <Container>
@@ -42,7 +32,6 @@ export default function Dashboard(): JSX.Element {
             </MissingConcerts>
           )}
         </CardContainer>
-        <Button onClick={() => handleClick()}>Logout</Button>
       </Container>
     </div>
   )
