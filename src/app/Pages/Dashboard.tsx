@@ -4,21 +4,21 @@ import styled from 'styled-components'
 import UpcomingConcerts from '../components/UpcomingConcerts/UpcomingConcerts'
 import type { Concert } from '../types'
 import Button from '../components/Button/Button'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import useFetch from '../hooks/useFetch'
 
 export default function Dashboard(): JSX.Element {
   const { username } = useParams()
-  const navigate = useNavigate()
   const concerts = useFetch<Concert[]>(`/${username}/concerts`)
 
   async function handleClick() {
-    const response = await fetch('/logout')
-    if (response.ok) {
-      navigate('/')
-    } else {
-      alert('Logout failed!')
-    }
+    await fetch('/logout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: null,
+    })
   }
 
   return (

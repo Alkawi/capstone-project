@@ -56,13 +56,9 @@ app.post('/login', async (req, res) => {
   }
 })
 
-app.get('/logout', async (req, res) => {
-  const username = req.cookies.username
-  if (username) {
-    res.clearCookie('username')
-  } else {
-    res.send('No user is logged in')
-  }
+app.post('/logout', async (_req, res) => {
+  res.setHeader('Set-Cookie', 'username= ; expires=Thu, 01 Jan 1970 00:00:00')
+  res.redirect('/login')
 })
 
 app.patch('/:username/concerts/add', async (req, res) => {
