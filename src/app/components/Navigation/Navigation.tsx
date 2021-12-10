@@ -1,13 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { HiHome, HiPlusCircle, HiOutlineUser } from 'react-icons/hi'
 import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 export default function Navigation(): JSX.Element {
   const { username } = useParams()
-  const [activeLink, setActiveLink] = useState<'Home' | 'Add' | 'Profile'>(
-    'Home'
-  )
 
   return (
     <NavBar>
