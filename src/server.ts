@@ -3,12 +3,18 @@ dotenv.config()
 
 import express from 'express'
 import cookieParser from 'cookie-parser'
-
+import jwt from 'jsonwebtoken'
 import { connectDatabase, getUserCollection } from './database'
 import { nanoid } from 'nanoid'
 
 if (!process.env.MONGODB_URI) {
   throw new Error("Couldn't connect to the database")
+}
+
+const { JWT_SECRET } = process.env
+
+if (!JWT_SECRET) {
+  throw new Error('No JWT_SECRET provided')
 }
 
 const app = express()
@@ -18,7 +24,8 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.get('/', async (req, res) => {
-  const username = req.cookies.username
+  const { sessiontoken } = req.cookies
+  const username = jwt.verify(sessiontoken, JWT_SECRET)
   const foundUser = await getUserCollection().findOne({ username })
   if (foundUser) {
     res.redirect(`/${username}`)
@@ -27,7 +34,7 @@ app.get('/', async (req, res) => {
   }
 })
 
-app.post('/register/', async (req, res) => {
+app.post('/api/register/', async (req, res) => {
   const newUser = req.body
   const existingUser = await getUserCollection().findOne({
     username: newUser.username,
@@ -42,28 +49,29 @@ app.post('/register/', async (req, res) => {
   }
 })
 
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
   const user = req.body
   const existingUser = await getUserCollection().findOne(
     { username: user.username },
     { projection: { _id: 0, username: 1, password: 1 } }
   )
   if (existingUser && existingUser.password === user.password) {
-    res.setHeader('Set-Cookie', `username=${existingUser.username}`)
-    res.status(200).send('Login successful')
+    const token = jwt.sign(user.username, JWT_SECRET)
+    res.cookie('sessiontoken', token).send()
   } else {
     res.status(403).send('Incorrect username or passwort')
   }
 })
 
-app.post('/logout', async (_req, res) => {
-  res.setHeader('Set-Cookie', 'username= ; expires=Thu, 01 Jan 1970 00:00:00')
+app.post('/api/logout', async (_req, res) => {
+  res.clearCookie('sessiontoken')
   res.redirect('/login')
 })
 
-app.patch('/:username/concerts/add', async (req, res) => {
+app.patch('/api/:username/concerts/add', async (req, res) => {
   const username = req.params.username
-  if (username !== req.cookies.username) {
+  const { sessiontoken } = req.cookies
+  if (username !== jwt.verify(sessiontoken, JWT_SECRET)) {
     res.status(403)
   } else {
     const concert = { id: nanoid(), ...req.body }
@@ -90,7 +98,7 @@ app.patch('/:username/concerts/add', async (req, res) => {
   }
 })
 
-app.get('/:username/concerts', async (req, res) => {
+app.get('/api/:username/concerts', async (req, res) => {
   const username = req.params.username
   const existingConcerts = await getUserCollection().findOne(
     {

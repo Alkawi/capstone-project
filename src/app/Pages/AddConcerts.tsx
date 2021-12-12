@@ -9,7 +9,7 @@ export default function AddConcerts(): JSX.Element {
   const { username } = useParams()
 
   async function handleSubmit(concert: Concert): Promise<void> {
-    const response = await fetch(`/${username}/concerts/add`, {
+    const response = await fetch(`/api/${username}/concerts/add`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
