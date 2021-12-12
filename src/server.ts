@@ -49,7 +49,7 @@ app.post('/api/login', async (req, res) => {
     { projection: { _id: 0, username: 1, password: 1 } }
   )
   if (existingUser && existingUser.password === user.password) {
-    res.setHeader('Set-Cookie', `username=${existingUser.username}`)
+    res.setHeader('Set-Cookie', `username=${existingUser.username}; path=/`)
     res.status(200).send('Login successful')
   } else {
     res.status(403).send('Incorrect username or passwort')
