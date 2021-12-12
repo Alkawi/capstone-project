@@ -27,7 +27,7 @@ app.get('/', async (req, res) => {
   }
 })
 
-app.post('/register/', async (req, res) => {
+app.post('/api/register/', async (req, res) => {
   const newUser = req.body
   const existingUser = await getUserCollection().findOne({
     username: newUser.username,
@@ -42,26 +42,26 @@ app.post('/register/', async (req, res) => {
   }
 })
 
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
   const user = req.body
   const existingUser = await getUserCollection().findOne(
     { username: user.username },
     { projection: { _id: 0, username: 1, password: 1 } }
   )
   if (existingUser && existingUser.password === user.password) {
-    res.setHeader('Set-Cookie', `username=${existingUser.username}`)
+    res.setHeader('Set-Cookie', `username=${existingUser.username}; path=/`)
     res.status(200).send('Login successful')
   } else {
     res.status(403).send('Incorrect username or passwort')
   }
 })
 
-app.post('/logout', async (_req, res) => {
+app.post('/api/logout', async (_req, res) => {
   res.setHeader('Set-Cookie', 'username= ; expires=Thu, 01 Jan 1970 00:00:00')
   res.redirect('/login')
 })
 
-app.patch('/:username/concerts/add', async (req, res) => {
+app.patch('/api/:username/concerts/add', async (req, res) => {
   const username = req.params.username
   if (username !== req.cookies.username) {
     res.status(403)
@@ -90,7 +90,7 @@ app.patch('/:username/concerts/add', async (req, res) => {
   }
 })
 
-app.get('/:username/concerts', async (req, res) => {
+app.get('/api/:username/concerts', async (req, res) => {
   const username = req.params.username
   const existingConcerts = await getUserCollection().findOne(
     {
@@ -108,10 +108,6 @@ app.get('/:username/concerts', async (req, res) => {
   } else {
     res.status(200).send(null)
   }
-})
-
-app.get('/api/hello', (_request, response) => {
-  response.json({ message: 'Hello API!' })
 })
 
 app.use('/storybook', express.static('dist/storybook'))
