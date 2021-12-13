@@ -1,6 +1,6 @@
 import React from 'react'
 import { HiHome, HiPlusCircle, HiOutlineUser } from 'react-icons/hi'
-import { Link, useParams } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 export default function Navigation(): JSX.Element {
@@ -8,15 +8,15 @@ export default function Navigation(): JSX.Element {
 
   return (
     <NavBar>
-      <Link to={`/${username}`}>
+      <NavLink to={`/${username}`}>
         <HomeIcon />
-      </Link>
-      <Link to={`/${username}/addConcert`}>
+      </NavLink>
+      <NavLink to={`/${username}/addConcert`}>
         <AddIcon />
-      </Link>
-      <Link to={`/${username}/profile`}>
+      </NavLink>
+      <NavLink to={`/${username}/profile`}>
         <ProfileIcon />
-      </Link>
+      </NavLink>
     </NavBar>
   )
 }
