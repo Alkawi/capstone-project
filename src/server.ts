@@ -4,7 +4,7 @@ dotenv.config()
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import jwt from 'jsonwebtoken'
-import { connectDatabase, getUserCollection } from './app/utils/database'
+import { connectDatabase, getUserCollection } from './database'
 import { nanoid } from 'nanoid'
 
 if (!process.env.MONGODB_URI) {
