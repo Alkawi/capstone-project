@@ -1,12 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
 import type { Concert } from '../../types'
+import Button from '../Button/Button'
 
 type CardProps = {
   concert: Concert
+  onDeleteClick: (concert: Concert) => void
 }
 
-export default function Card({ concert }: CardProps): JSX.Element {
+export default function Card({
+  concert,
+  onDeleteClick,
+}: CardProps): JSX.Element {
+  function handleDeleteClick() {
+    onDeleteClick(concert)
+  }
+
   return (
     <CardContainer>
       <h2>{concert.mainAct}</h2>
@@ -16,6 +25,7 @@ export default function Card({ concert }: CardProps): JSX.Element {
       <span>
         {concert.numberOfTickets} ticket{concert.numberOfTickets > 1 ? 's' : ''}
       </span>
+      <Button onClick={() => handleDeleteClick()}>Delete concert</Button>
     </CardContainer>
   )
 }
