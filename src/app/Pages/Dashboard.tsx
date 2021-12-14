@@ -9,7 +9,9 @@ import useFetch from '../hooks/useFetch'
 
 export default function Dashboard(): JSX.Element {
   const { username } = useParams()
-  const [concerts, refetch] = useFetch<Concert[]>(`/api/${username}/concerts`)
+  const [concerts, refetchConcerts] = useFetch<Concert[]>(
+    `/api/${username}/concerts`
+  )
 
   async function handleClick() {
     await fetch('/api/logout', {
@@ -23,7 +25,7 @@ export default function Dashboard(): JSX.Element {
     })
     if (response.ok) {
       console.log(`Concert with id ${concert.id} was deleted`)
-      refetch()
+      refetchConcerts()
     } else {
       console.log("Concert couldn't be deleted")
     }
