@@ -23,8 +23,14 @@ const concert: Concert[] = [
   },
 ]
 
-export const CardWithSupport = (): JSX.Element => <Card concert={concert[0]} />
+function handleDeleteClick(concert: Concert) {
+  console.log(`${concert} deleted`)
+}
+
+export const CardWithSupport = (): JSX.Element => (
+  <Card concert={concert[0]} onDeleteClick={handleDeleteClick} />
+)
 
 export const CardWithoutSupport = (): JSX.Element => (
-  <Card concert={concert[1]} />
+  <Card concert={concert[1]} onDeleteClick={handleDeleteClick} />
 )
