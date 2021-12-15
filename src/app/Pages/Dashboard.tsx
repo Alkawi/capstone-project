@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import UpcomingConcerts from '../components/UpcomingConcerts/UpcomingConcerts'
 import type { Concert } from '../types'
 import Button from '../components/Button/Button'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import useFetch from '../hooks/useFetch'
 
 export default function Dashboard(): JSX.Element {
@@ -13,10 +13,13 @@ export default function Dashboard(): JSX.Element {
     `/api/${username}/concerts`
   )
 
+  const navigate = useNavigate()
+
   async function handleClick() {
     await fetch('/api/logout', {
       method: 'POST',
     })
+    navigate('/login')
   }
 
   async function handleDelete(concert: Concert) {
