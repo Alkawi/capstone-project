@@ -98,6 +98,26 @@ app.patch('/api/:username/concerts/add', async (req, res) => {
   }
 })
 
+app.patch('/api/:username/concerts/:id', async (req, res) => {
+  const { sessiontoken } = req.cookies
+  const username = jwt.verify(sessiontoken, JWT_SECRET)
+  const concertId = req.params.id
+  if (username === req.params.username) {
+    const existingUser = await getUserCollection().updateOne(
+      { username },
+      { $pull: { concerts: { id: concertId } } }
+    )
+
+    if (existingUser.modifiedCount > 0) {
+      res.status(200)
+    } else {
+      res.status(400)
+    }
+  } else {
+    res.status(401)
+  }
+})
+
 app.get('/api/:username/concerts', async (req, res) => {
   const username = req.params.username
   const existingConcerts = await getUserCollection().findOne(
