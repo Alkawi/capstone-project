@@ -25,10 +25,12 @@ app.use(cookieParser())
 
 app.get('/', async (req, res) => {
   const { sessiontoken } = req.cookies
-  const username = jwt.verify(sessiontoken, JWT_SECRET)
-  const foundUser = await getUserCollection().findOne({ username })
-  if (foundUser) {
-    res.redirect(`/${username}`)
+  if (sessiontoken) {
+    const username = jwt.verify(sessiontoken, JWT_SECRET)
+    const foundUser = await getUserCollection().findOne({ username })
+    if (foundUser) {
+      res.redirect(`/${username}`)
+    }
   } else {
     res.redirect('/login')
   }
