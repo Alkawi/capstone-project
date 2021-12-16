@@ -18,5 +18,5 @@ export default function UpcomingConcerts({
 
 const Upcoming = styled.span`
   color: var(--color-font-dark);
-  align-self: center;
+  place-self: start center;
 `

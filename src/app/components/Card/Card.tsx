@@ -39,6 +39,7 @@ const CardContainer = styled.article`
   border-radius: 8px;
   border: 1px solid var(--color-font-dark);
   padding: 1rem;
+  margin: 0 1rem;
   background-color: var(--color-light-orange);
   color: var(--color-font-dark);
 `
