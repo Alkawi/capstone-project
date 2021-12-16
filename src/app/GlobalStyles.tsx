@@ -25,6 +25,11 @@ const GlobalStyles = createGlobalStyle`
     background-color: var(--color-orange);
   }
 
+  #app{
+    display: grid;
+    grid-template-rows: 15% auto 10%;
+    height: 100%;
+  }
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

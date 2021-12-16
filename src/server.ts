@@ -25,10 +25,12 @@ app.use(cookieParser())
 
 app.get('/', async (req, res) => {
   const { sessiontoken } = req.cookies
-  const username = jwt.verify(sessiontoken, JWT_SECRET)
-  const foundUser = await getUserCollection().findOne({ username })
-  if (foundUser) {
-    res.redirect(`/${username}`)
+  if (sessiontoken) {
+    const username = jwt.verify(sessiontoken, JWT_SECRET)
+    const foundUser = await getUserCollection().findOne({ username })
+    if (foundUser) {
+      res.redirect(`/${username}`)
+    }
   } else {
     res.redirect('/login')
   }
@@ -95,6 +97,26 @@ app.patch('/api/:username/concerts/add', async (req, res) => {
     } else {
       res.status(204)
     }
+  }
+})
+
+app.patch('/api/:username/concerts/:id', async (req, res) => {
+  const { sessiontoken } = req.cookies
+  const username = jwt.verify(sessiontoken, JWT_SECRET)
+  const concertId = req.params.id
+  if (username === req.params.username) {
+    const existingUser = await getUserCollection().updateOne(
+      { username },
+      { $pull: { concerts: { id: concertId } } }
+    )
+
+    if (existingUser.modifiedCount > 0) {
+      res.status(200)
+    } else {
+      res.status(400)
+    }
+  } else {
+    res.status(401)
   }
 })
 
