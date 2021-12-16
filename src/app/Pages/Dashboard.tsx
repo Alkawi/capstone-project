@@ -8,15 +8,32 @@ import useFetch from '../hooks/useFetch'
 
 export default function Dashboard(): JSX.Element {
   const { username } = useParams()
-  const [concerts] = useFetch<Concert[]>(`/api/${username}/concerts`)
+  const [concerts, refetchConcerts] = useFetch<Concert[]>(
+    `/api/${username}/concerts`
+  )
 
+  async function handleDelete(concert: Concert) {
+    const response = await fetch(`/api/${username}/concerts/${concert.id}`, {
+      method: 'PATCH',
+    })
+    if (response.ok) {
+      console.log(`Concert with id ${concert.id} was deleted`)
+      refetchConcerts()
+    } else {
+      console.log("Concert couldn't be deleted")
+    }
+  }
   return (
     <Container>
       <UpcomingConcerts concerts={concerts} />
       <CardContainer>
         {concerts &&
           concerts.map((concert) => (
-            <Card key={concert.id} concert={concert} />
+            <Card
+              key={concert.id}
+              concert={concert}
+              onDeleteClick={handleDelete}
+            />
           ))}
         {!concerts && (
           <MissingConcerts>
