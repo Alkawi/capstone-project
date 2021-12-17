@@ -35,7 +35,7 @@ export default function Dashboard(): JSX.Element {
               onDeleteClick={handleDelete}
             />
           ))}
-        {!concerts && (
+        {(!concerts || concerts.length === 0) && (
           <MissingConcerts>
             <h2>No concerts available</h2>
             <p>Please add a concert</p>
