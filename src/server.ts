@@ -140,6 +140,23 @@ app.get('/api/:username/concerts', async (req, res) => {
   }
 })
 
+app.patch('/api/:username/changePassword', async (req, res) => {
+  const username = req.params.username
+  const { sessiontoken } = req.cookies
+  const { password, newPassword } = req.body
+  if (sessiontoken === jwt.verify(sessiontoken, JWT_SECRET)) {
+    const updatePw = await getUserCollection().updateOne(
+      { username, password },
+      { $set: { password: newPassword } }
+    )
+    if (updatePw.modifiedCount > 0) {
+      res.sendStatus(200)
+    }
+  } else {
+    res.sendStatus(403)
+  }
+})
+
 app.use('/storybook', express.static('dist/storybook'))
 
 app.use(express.static('dist/app'))

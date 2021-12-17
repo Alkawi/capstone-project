@@ -6,14 +6,10 @@ export default {
   component: UpdatePasswordForm,
 }
 
-function handleSubmit(
-  username: string,
-  password: string,
-  newPassword: string
-): void {
-  console.log(`Changed ${username}s from ${password} to ${newPassword}`)
+function handleSubmit(password: string, newPassword: string): void {
+  console.log(`Changed password from ${password} to ${newPassword}`)
 }
 
 export const UserFormLogin = (): JSX.Element => (
-  <UpdatePasswordForm onSubmit={handleSubmit} username="Peter" />
+  <UpdatePasswordForm onSubmit={handleSubmit} />
 )
