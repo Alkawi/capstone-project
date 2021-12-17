@@ -16,6 +16,7 @@ function App(): JSX.Element {
         <Route path="/" />
         <Route path=":username" element={<Dashboard />} />
         <Route path=":username/addConcert" element={<AddConcerts />} />
+        <Route path=":username/profile" element={<UserProfile />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
       </Routes>
