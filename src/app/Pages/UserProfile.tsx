@@ -11,7 +11,7 @@ export default function UserProfile(): JSX.Element {
   const concerts = useFetch<Concert[]>(`/${username}/concerts`)
 
   async function handleSubmit(password: string, newPassword: string) {
-    const response = await fetch(`/${username}/changePassword`, {
+    const response = await fetch(`/api/${username}/changePassword`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

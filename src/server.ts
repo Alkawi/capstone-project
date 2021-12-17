@@ -140,7 +140,7 @@ app.get('/api/:username/concerts', async (req, res) => {
   }
 })
 
-app.patch('/:username/changePassword', async (req, res) => {
+app.patch('/api/:username/changePassword', async (req, res) => {
   const username = req.params.username
   const { password, newPassword } = req.body
   const updatePw = await getUserCollection().updateOne(
