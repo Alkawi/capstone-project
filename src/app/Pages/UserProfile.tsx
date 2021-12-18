@@ -8,7 +8,7 @@ import Button from '../components/Button/Button'
 
 export default function UserProfile(): JSX.Element {
   const { username } = useParams()
-  const concerts = useFetch<Concert[]>(`/${username}/concerts`)
+  const [concerts] = useFetch<Concert[]>(`/api/${username}/concerts`)
 
   async function handleSubmit(password: string, newPassword: string) {
     const response = await fetch(`/api/${username}/changePassword`, {
