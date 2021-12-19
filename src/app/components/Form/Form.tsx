@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Button from '../Button/Button'
 import type { Concert } from '../../types'
-import { Link, useParams } from 'react-router-dom'
 
 type FormProps = {
   onSubmit: (concert: Concert) => void
@@ -14,7 +13,6 @@ export default function Form({ onSubmit }: FormProps): JSX.Element {
   const [concertDate, setConcertDate] = useState<string>('')
   const [location, setLocation] = useState<string>('')
   const [numberOfTickets, setNumberOfTickets] = useState<number>(1)
-  const { username } = useParams()
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     onSubmit({ mainAct, support, concertDate, location, numberOfTickets })
@@ -72,10 +70,7 @@ export default function Form({ onSubmit }: FormProps): JSX.Element {
           onChange={(event) => setNumberOfTickets(event.target.valueAsNumber)}
         />
       </Label>
-      <Button type="submit">Save and go back</Button>
-      <HomeLink to={`/${username}`}>
-        <Button>Cancel</Button>
-      </HomeLink>
+      <Button type="submit">Save concert</Button>
     </AddForm>
   )
 }
@@ -97,7 +92,4 @@ const Input = styled.input`
   border: 0;
   border-radius: 5px;
   height: 1.5rem;
-`
-const HomeLink = styled(Link)`
-  display: contents;
 `

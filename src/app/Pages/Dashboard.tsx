@@ -18,10 +18,10 @@ export default function Dashboard(): JSX.Element {
     })
     if (response.ok) {
       console.log(`Concert with id ${concert.id} was deleted`)
-      refetchConcerts()
     } else {
       console.log("Concert couldn't be deleted")
     }
+    refetchConcerts()
   }
   return (
     <Container>
@@ -35,7 +35,7 @@ export default function Dashboard(): JSX.Element {
               onDeleteClick={handleDelete}
             />
           ))}
-        {!concerts && (
+        {(!concerts || concerts.length === 0) && (
           <MissingConcerts>
             <h2>No concerts available</h2>
             <p>Please add a concert</p>

@@ -9,18 +9,15 @@ export default function AddConcerts(): JSX.Element {
   const { username } = useParams()
 
   async function handleSubmit(concert: Concert): Promise<void> {
-    const response = await fetch(`/api/${username}/concerts/add`, {
+    await fetch(`/api/${username}/concerts/add`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(concert),
     })
-    if (response.status === 200) {
-      navigate(`/${username}`)
-    } else {
-      alert("Concert couldn't be added")
-    }
+
+    navigate(`/${username}`)
   }
 
   return (
